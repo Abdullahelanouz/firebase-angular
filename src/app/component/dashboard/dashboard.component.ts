@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { FileMetaData } from '../../model/file-meta-data';
+import { Student } from '../../model/student';
 import { AuthService } from 'src/app/shared/auth.service';
+import { DataService } from 'src/app/shared/data.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,79 +15,79 @@ export class DashboardComponent implements OnInit {
 
 
 
-  // studentsList: Student[] = [];
-  // studentObj: Student = {
-  //   id: '',
-  //   first_name: '',
-  //   last_name: '',
-  //   email: '',
-  //   mobile: ''
-  // };
-  // id: string = '';
-  // first_name: string = '';
-  // last_name: string = '';
-  // email: string = '';
-  // mobile: string = '';
+  studentsList: Student[] = [];
+  studentObj: Student = {
+    id: '',
+    first_name: '',
+    last_name: '',
+    email: '',
+    mobile: ''
+  };
+  id: string = '';
+  first_name: string = '';
+  last_name: string = '';
+  email: string = '';
+  mobile: string = '';
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService, private data: DataService) { }
 
   ngOnInit(): void {
-    //this.getAllStudents();
+    this.getAllStudents();
   }
 
   register() {
     this.auth.logout();
   }
 
-  // getAllStudents() {
+  getAllStudents() {
 
-  //   this.data.getAllStudents().subscribe(res => {
+    this.data.getAllStudents().subscribe(res => {
 
-  //     this.studentsList = res.map((e: any) => {
-  //       const data = e.payload.doc.data();
-  //       data.id = e.payload.doc.id;
-  //       return data;
-  //     })
+      this.studentsList = res.map((e: any) => {
+        const data = e.payload.doc.data();
+        data.id = e.payload.doc.id;
+        return data;
+      })
 
-  //   }, err => {
-  //     alert('Error while fetching student data');
-  //   })
+    }, err => {
+      alert('Error while fetching student data');
+    })
 
-  // }
+  }
 
-  // resetForm() {
-  //   this.id = '';
-  //   this.first_name = '';
-  //   this.last_name = '';
-  //   this.email = '';
-  //   this.mobile = '';
-  // }
+  resetForm() {
+    this.id = '';
+    this.first_name = '';
+    this.last_name = '';
+    this.email = '';
+    this.mobile = '';
+  }
 
-  // addStudent() {
-  //   if (this.first_name == '' || this.last_name == '' || this.mobile == '' || this.email == '') {
-  //     alert('Fill all input fields');
-  //     return;
-  //   }
+  addStudent() {
+    if (this.first_name == '' || this.last_name == '' || this.mobile == '' || this.email == '') {
+      alert('Fill all input fields');
+      return;
+    }
 
-  //   this.studentObj.id = '';
-  //   this.studentObj.email = this.email;
-  //   this.studentObj.first_name = this.first_name;
-  //   this.studentObj.last_name = this.last_name;
-  //   this.studentObj.mobile = this.mobile;
+    this.studentObj.id = '';
+    this.studentObj.email = this.email;
+    this.studentObj.first_name = this.first_name;
+    this.studentObj.last_name = this.last_name;
+    this.studentObj.mobile = this.mobile;
 
-  //   this.data.addStudent(this.studentObj);
-  //   this.resetForm();
+    this.data.addStudent(this.studentObj);
+    this.resetForm();
 
-  // }
+  }
 
-  // updateStudent() {
+  updateStudent() {
 
-  // }
+  }
 
-  // deleteStudent(student: Student) {
-  //   if (window.confirm('Are you sure you want to delete ' + student.first_name + ' ' + student.last_name + ' ?')) {
-  //     this.data.deleteStudent(student);
-  //   }
-  // }
+  deleteStudent(student: Student) {
+    if (window.confirm('Are you sure you want to delete ' + student.first_name + ' ' + student.last_name + ' ?')) {
+      this.data.deleteStudent(student);
+    }
+  }
 
 }
