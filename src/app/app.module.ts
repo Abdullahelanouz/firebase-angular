@@ -9,13 +9,19 @@ import { environment } from 'src/environments/environment';
 import { LoginComponent } from './component/login/login.component';
 import { RegisterComponent } from './component/register/register.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
+import { ForgotPasswordComponent } from './component/forgot-password/forgot-password.component';
+import { VarifyEmailComponent } from './component/varify-email/varify-email.component';
+import { FileuploadComponent } from './component/fileupload/fileupload.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    DashboardComponent
+    DashboardComponent,
+    ForgotPasswordComponent,
+    VarifyEmailComponent,
+    FileuploadComponent
   ],
   imports: [
     BrowserModule,
